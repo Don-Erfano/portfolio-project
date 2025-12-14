@@ -1,0 +1,46 @@
+.nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 70px;
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+  z-index: 50;
+}
+
+.list {
+  list-style: none;
+  padding: 120px 24px;
+  margin: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+  opacity: 0;
+  transform: translateX(30px);
+  color:black;
+  cursor: pointer;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: black;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.label {
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  opacity: 0.85;
+}
+
+.item:hover .label {
+  opacity: 1;
+}

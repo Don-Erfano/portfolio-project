@@ -1,4 +1,5 @@
 import { SideNav } from '@/components/SideNav';
+import { IntroSection } from '@/components/Sections';
 
 export default function Home() {
   return (
@@ -8,7 +9,7 @@ export default function Home() {
         id="intro"
         className="min-h-screen flex items-center justify-center border-b border-white/10"
       >
-        <h1 className="text-4xl font-bold">INTRO SECTION</h1>
+        <IntroSection />
       </section>
 
       <section

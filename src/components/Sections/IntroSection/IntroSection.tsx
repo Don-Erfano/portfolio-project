@@ -8,10 +8,39 @@ const IntroSection = () => {
   const nameRef = useRef<HTMLImageElement>(null);
   const userImageRef = useRef<HTMLImageElement>(null);
   const descRef = useRef<HTMLDivElement>(null);
+  const linesRef = useRef<HTMLDivElement[]>([]);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
+      linesRef.current.forEach((line) => {
+        gsap.set(line, {
+          x: gsap.utils.random(0, window.innerWidth),
+          y: gsap.utils.random(0, window.innerHeight),
+          rotation: gsap.utils.random(0, 360),
+          width: gsap.utils.random(500, 700),
+          height: 1,
+          opacity: 0,
+        });
+
+        gsap.to(line, {
+          opacity: 'random(0.2, 0.6)',
+          duration: 'random(2, 4)',
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+        });
+
+        gsap.to(line, {
+          x: `+=${gsap.utils.random(-200, 200)}`,
+          y: `+=${gsap.utils.random(-200, 200)}`,
+          rotation: `+=${gsap.utils.random(-90, 90)}`,
+          duration: 'random(10, 20)',
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+        });
+      });
 
       tl.fromTo(
         nameRef.current,
@@ -42,6 +71,18 @@ const IntroSection = () => {
       ref={containerRef}
       className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden bg-black text-white"
     >
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            ref={(el) => {
+              if (el) linesRef.current[i] = el;
+            }}
+            className="absolute bg-red-600/60"
+          />
+        ))}
+      </div>
+
       <div className="absolute inset-0 flex items-center justify-center z-0">
         <img
           ref={nameRef}

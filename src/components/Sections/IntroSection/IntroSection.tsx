@@ -9,6 +9,7 @@ const IntroSection = () => {
   const userImageRef = useRef<HTMLImageElement>(null);
   const descRef = useRef<HTMLDivElement>(null);
   const linesRef = useRef<HTMLDivElement[]>([]);
+  const cursorRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -59,8 +60,33 @@ const IntroSection = () => {
         descRef.current,
         { x: -50, opacity: 0 },
         { x: 0, opacity: 1, duration: 1, ease: 'power2.out' },
-        '-=0.5',
       );
+      // Mouse follower animation
+      const xTo = gsap.quickTo(cursorRef.current, 'x', {
+        duration: 0.6,
+        ease: 'power3',
+      });
+      const yTo = gsap.quickTo(cursorRef.current, 'y', {
+        duration: 0.6,
+        ease: 'power3',
+      });
+
+      let isVisible = false;
+
+      const onMove = (e: MouseEvent) => {
+        if (!isVisible && cursorRef.current) {
+          gsap.to(cursorRef.current, { opacity: 1, duration: 0.5 });
+          isVisible = true;
+        }
+        xTo(e.clientX);
+        yTo(e.clientY);
+      };
+
+      window.addEventListener('mousemove', onMove);
+
+      return () => {
+        window.removeEventListener('mousemove', onMove);
+      };
     }, containerRef);
 
     return () => ctx.revert();
@@ -78,10 +104,22 @@ const IntroSection = () => {
             ref={(el) => {
               if (el) linesRef.current[i] = el;
             }}
-            className="absolute bg-red-600/60"
+            className="absolute bg-red-600/10"
           />
         ))}
       </div>
+
+      <div
+        ref={cursorRef}
+        className="absolute w-125 h-125 rounded-full pointer-events-none z-0 mix-blend-screen blur-[80px] opacity-0"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(220, 38, 38, 0.6) 0%, rgba(220, 38, 38, 0) 70%)',
+          top: 0,
+          left: 0,
+          transform: 'translate(-50%, -50%)',
+        }}
+      />
 
       <div className="absolute inset-0 flex items-center justify-center z-0">
         <img

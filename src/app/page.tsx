@@ -1,27 +1,21 @@
 import { SideNav } from '@/components/SideNav';
-import { IntroSection } from '@/components/Sections';
+import { Design, IntroSection } from '@/components/Sections';
 
 export default function Home() {
   return (
     <main className="relative bg-zinc-950 min-h-screen text-white">
       <SideNav />
-      <section
-        id="intro"
-        className="min-h-screen flex items-center justify-center border-b border-white/10"
-      >
+      <div id="intro" className="min-h-screen flex items-center justify-center">
         <IntroSection />
-      </section>
+      </div>
 
-      <section
-        id="ui-ux"
-        className="min-h-screen flex items-center justify-center border-b border-white/10 bg-zinc-900"
-      >
-        <h1 className="text-4xl font-bold">UI/UX & LOGO DESIGNS</h1>
-      </section>
+      <div id="ui-ux">
+        <Design />
+      </div>
 
       <section
         id="posters"
-        className="min-h-screen flex items-center justify-center border-b border-white/10"
+        className="min-h-screen flex items-center justify-center"
       >
         <h1 className="text-4xl font-bold">POSTERS</h1>
       </section>

@@ -97,13 +97,13 @@ const IntroSection = () => {
       className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden bg-black text-white"
     >
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {[...Array(20)].map((_, i) => (
+        {[...Array.from(Array(2))].map((_, i) => (
           <div
             key={i}
             ref={(el) => {
               if (el) linesRef.current[i] = el;
             }}
-            className="absolute bg-red-600/10"
+            className="absolute bg-red-600/50"
           />
         ))}
       </div>
@@ -113,7 +113,7 @@ const IntroSection = () => {
         className="absolute w-125 h-125 rounded-full pointer-events-none z-0 mix-blend-screen blur-[80px] opacity-0"
         style={{
           background:
-            'radial-gradient(circle, rgba(220, 38, 38, 0.6) 0%, rgba(220, 38, 38, 0) 70%)',
+            'radial-gradient(circle, rgba(220, 38, 38, 0.4) 0%, rgba(220, 38, 38, 0) 70%)',
           top: 0,
           left: 0,
           transform: 'translate(-50%, -50%)',
@@ -132,7 +132,7 @@ const IntroSection = () => {
       <div className="absolute bottom-0 z-10 flex h-full items-end justify-center">
         <Image
           ref={userImageRef}
-          src="/assets/Group 232331.png"
+          src="/assets/main Home image.webp"
           alt="Marv Portrait"
           width={800}
           height={1200}
